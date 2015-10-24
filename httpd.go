@@ -9,6 +9,9 @@ func main() {
   r := gin.Default()
 
   // Routes
+  r.GET("/", func(c *gin.Context) {
+    c.String(200, "index")
+  })
   r.GET("/ping", func(c *gin.Context) {
     c.String(200, "pong")
   })
