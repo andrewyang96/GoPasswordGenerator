@@ -5,7 +5,7 @@ import (
   "github.com/gin-gonic/gin"
   "bufio"
   "math/rand"
-  "time"
+  "strconv"
 )
 
 // Set numWords constant
@@ -18,7 +18,6 @@ func check(e error) {
 }
 
 func randChoice(arr [numWords]string) (string) {
-  rand.Seed(time.Now().Unix())
   idx := rand.Intn(len(arr))
   return arr[idx]
 }
@@ -53,6 +52,24 @@ func main() {
   r.GET("/randword", func(c *gin.Context) {
     myWord := randChoice(words)
     c.String(200, myWord)
+  })
+
+  // Random words
+  r.GET("/randwords", func(c *gin.Context) {
+    num, err := strconv.Atoi(c.DefaultQuery("num", "4"))
+    if err != nil {
+      c.String(500, "Atoi failed")
+    } else if num < 0 {
+      c.String(500, "Invalid input")
+    } else {
+      // Dynamic array allocation
+      var myWords []string
+      myWords = make([]string, num)
+      for i, _ := range myWords {
+        myWords[i] = randChoice(words)
+      }
+      c.JSON(200, gin.H{"words": myWords})
+    }
   })
 
   /* End routes */
