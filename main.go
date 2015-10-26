@@ -53,31 +53,40 @@ func main() {
     tmpl, err := template.ParseFiles("templates/layouts/index.html", "templates/partials/head.html", "templates/partials/index.html")
     if err != nil {
       c.String(500, "Internal Server Error: Error parsing templates")
-    } else {
-      contextObj := gin.H{"title": "Password Generator"}
-      err := tmpl.Execute(c.Writer, contextObj)
-      if err != nil {
-        c.String(500, "Internal Server Error: Error executing compiled template")
-      }
+      return
+    }
+
+    contextObj := gin.H{"title": "Password Generator"}
+
+    err = tmpl.Execute(c.Writer, contextObj)
+    if err != nil {
+      c.String(500, "Internal Server Error: Error executing compiled template")
+      return
     }
   })
 
   // Random words
   r.GET("/randwords", func(c *gin.Context) {
     num, err := strconv.Atoi(c.DefaultQuery("num", "4"))
+
     if err != nil {
       c.String(400, "Bad Request: Num paramenter was not an integer.")
-    } else if num <= 0 {
-      c.String(400, "Bad Request: Num parameter must be positive.")
-    } else {
-      // Dynamic array allocation
-      var myWords []string
-      myWords = make([]string, num)
-      for i, _ := range myWords {
-        myWords[i] = randChoice(words)
-      }
-      c.JSON(200, gin.H{"words": myWords})
+      return
     }
+    if num <= 0 {
+      c.String(400, "Bad Request: Num parameter must be positive.")
+      return
+    }
+
+    // Dynamic array allocation
+    var myWords []string
+    myWords = make([]string, num)
+
+    for i, _ := range myWords {
+      myWords[i] = randChoice(words)
+    }
+
+    c.JSON(200, gin.H{"words": myWords})
   })
 
   /* End routes */
