@@ -1,0 +1,14 @@
+{
+	"rightparen": {
+		"title": "Right Parenthesis",
+		"char": ")"
+	},
+	"rightbracket": {
+		"title": "Right Bracket",
+		"char": "]"
+	},
+	"rightcurly": {
+		"title": "Right Curly Brace",
+		"char": "}"
+	}
+}

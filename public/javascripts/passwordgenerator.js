@@ -1,11 +1,11 @@
 var PasswordOptionSelector = React.createClass({
 	getDefaultProps: function () {
-		return {name: "defaultname", title: "Title not assigned", options: []};
+		return {key: "defaultkey", title: "Title not assigned", options: []};
 	},
 
 	render: function () {
 		var createOption = function (opt) {
-			return <option key={opt.char}>{opt.name}</option>;
+			return <option key={opt.key} value={opt.key}>{opt.title}</option>;
 		};
 		return (
 		<div>
@@ -18,6 +18,10 @@ var PasswordOptionSelector = React.createClass({
 });
 
 var PasswordGenerator = React.createClass({
+	getDefaultProps: function () {
+		return {}; // TODO
+	},
+
 	getInitialState: function () {
 		return {words: []};
 	},

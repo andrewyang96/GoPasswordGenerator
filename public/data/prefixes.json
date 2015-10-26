@@ -1,0 +1,14 @@
+{
+	"leftparen": {
+		"title": "Left Parenthesis",
+		"char": "("
+	},
+	"leftbracket": {
+		"title": "Left Bracket",
+		"char": "["
+	},
+	"leftcurly": {
+		"title": "Left Curly Brace",
+		"char": "{"
+	}
+}

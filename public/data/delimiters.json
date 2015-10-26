@@ -1,0 +1,106 @@
+{
+	"space": {
+		"title": "Space",
+		"char": " "
+	},
+	"comma": {
+		"title": "Comma",
+		"char": ","
+	},
+	"period": {
+		"title": "Period",
+		"char": "."
+	},
+	"semicolon": {
+		"title": "Semicolon",
+		"char": ";"
+	},
+	"colon": {
+		"title": "Colon",
+		"char": ":"
+	},
+	"dash": {
+		"title": "Dash",
+		"char": "-"
+	},
+	"underscore": {
+		"title": "Underscore",
+		"char": "_"
+	},
+	"pipe": {
+		"title": "Pipe",
+		"char": "|"
+	},
+	"slash": {
+		"title": "Slash",
+		"char": "/"
+	},
+	"backslash": {
+		"title": "Backslash",
+		"char": "\\"
+	},
+	"apostrophe": {
+		"title": "Apostrophe",
+		"char": "'"
+	},
+	"quotation": {
+		"title": "Quotation Mark",
+		"char": "\""
+	},
+	"exclamation": {
+		"title": "Exclamation Point",
+		"char": "!"
+	},
+	"question": {
+		"title": "Question Mark",
+		"char": "?"
+	},
+	"tilde": {
+		"title": "Tilde",
+		"char": "~"
+	},
+	"grave": {
+		"title": "Grave Accent",
+		"char": "`"
+	},
+	"at": {
+		"title": "At sign",
+		"char": "@"
+	},
+	"pound": {
+		"title": "Pound sign",
+		"char": "#"
+	},
+	"dollar": {
+		"title": "Dollar sign",
+		"char": "$"
+	},
+	"percent": {
+		"title": "Percent sign",
+		"char": "%"
+	},
+	"caret": {
+		"title": "Caret",
+		"char": "^"
+	},
+	"ampersand": {
+		"title": "Ampersand",
+		"char": "&"
+	},
+	"asterisk": {
+		"title": "Asterisk",
+		"char": "*"
+	},
+	"plus": {
+		"title": "Plus sign",
+		"char": "+"
+	},
+	"lessthan": {
+		"title": "Less-than sign",
+		"char": "<"
+	},
+	"greaterthan": {
+		"title": "Greater-than sign",
+		"char": ">"
+	}
+}

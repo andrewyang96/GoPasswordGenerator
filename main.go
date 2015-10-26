@@ -2,8 +2,10 @@ package main
 
 import (
   "bufio"
+  "encoding/json"
   "github.com/gin-gonic/contrib/static"
   "github.com/gin-gonic/gin"
+  "io/ioutil"
   "math/rand"
   "os"
   "strconv"
@@ -24,12 +26,41 @@ func randChoice(arr [numWords]string) (string) {
   return arr[idx]
 }
 
+func extendJSON(target map[string]interface{}, extension map[string]interface{}) map[string]interface{} {
+  var resultSlice map[string]interface{} = make(map[string]interface{}, len(target) + len(extension))
+  for k, v := range target {
+    resultSlice[k] = v
+  }
+  for k, v := range extension {
+    resultSlice[k] = v
+  }
+  return resultSlice
+}
+
 func main() {
   // Create gin router
   r := gin.Default()
 
   // Setup router
   r.Use(static.Serve("/", static.LocalFile("public", false)))
+
+  // Read data files
+  var e error
+  var data []byte
+  var delimiters, prefixes, suffixes map[string]interface{}
+  data, e = ioutil.ReadFile("public/data/delimiters.json")
+  check(e)
+  e = json.Unmarshal(data, &delimiters)
+  check(e)
+  data, e = ioutil.ReadFile("public/data/prefixes.json")
+  check(e)
+  e = json.Unmarshal(data, &prefixes)
+  check(e)
+  prefixes = extendJSON(prefixes, delimiters)
+  data, e = ioutil.ReadFile("public/data/suffixes.json")
+  check(e)
+  e = json.Unmarshal(data, &suffixes)
+  suffixes = extendJSON(suffixes, delimiters)
 
   // Create word array
   var words [numWords]string
@@ -88,6 +119,18 @@ func main() {
     }
 
     c.JSON(200, gin.H{"words": myWords})
+  })
+
+  r.GET("/delimiters", func(c *gin.Context) {
+    c.JSON(200, gin.H(delimiters))
+  })
+
+  r.GET("/prefixes", func(c *gin.Context) {
+    c.JSON(200, gin.H(prefixes))
+  })
+
+  r.GET("/suffixes", func(c *gin.Context) {
+    c.JSON(200, gin.H(suffixes))
   })
 
   /* End routes */
