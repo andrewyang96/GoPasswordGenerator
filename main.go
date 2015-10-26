@@ -1,13 +1,13 @@
 package main
 
 import (
-  "fmt"
-  "os"
-  "github.com/gin-gonic/gin"
-  "github.com/gin-gonic/contrib/static"
   "bufio"
+  "github.com/gin-gonic/contrib/static"
+  "github.com/gin-gonic/gin"
   "math/rand"
+  "os"
   "strconv"
+  "text/template"
 )
 
 // Set numWords constant
@@ -50,14 +50,22 @@ func main() {
 
   // Index
   r.GET("/", func(c *gin.Context) {
-    c.String(200, "index")
+    tmpl, err := template.ParseFiles("templates/layouts/index.html", "templates/partials/head.html", "templates/partials/index.html")
+    if err != nil {
+      c.String(500, "Internal Server Error: Error parsing templates")
+    } else {
+      contextObj := gin.H{"title": "Password Generator"}
+      err := tmpl.Execute(c.Writer, contextObj)
+      if err != nil {
+        c.String(500, "Internal Server Error: Error executing compiled template")
+      }
+    }
   })
 
   // Random words
   r.GET("/randwords", func(c *gin.Context) {
     num, err := strconv.Atoi(c.DefaultQuery("num", "4"))
     if err != nil {
-      fmt.Println("Atoi failed for " + c.Query("num"))
       c.String(400, "Bad Request: Num paramenter was not an integer.")
     } else if num <= 0 {
       c.String(400, "Bad Request: Num parameter must be positive.")
