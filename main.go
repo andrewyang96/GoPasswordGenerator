@@ -50,13 +50,14 @@ func main() {
 
   // Index
   r.GET("/", func(c *gin.Context) {
-    tmpl, err := template.ParseFiles("templates/layouts/index.html", "templates/partials/head.html", "templates/partials/index.html")
+    tmpl, err := template.ParseFiles("templates/layouts/index.html", "templates/partials/head.html",
+      "templates/partials/index.html", "templates/partials/footer.html")
     if err != nil {
       c.String(500, "Internal Server Error: Error parsing templates")
       return
     }
 
-    contextObj := gin.H{"title": "Password Generator"}
+    contextObj := gin.H{"title": "EZ Password Generator"}
 
     err = tmpl.Execute(c.Writer, contextObj)
     if err != nil {
