@@ -1,8 +1,10 @@
 package main
 
 import (
+  "fmt"
   "os"
   "github.com/gin-gonic/gin"
+  "github.com/gin-gonic/contrib/static"
   "bufio"
   "math/rand"
   "strconv"
@@ -26,6 +28,9 @@ func main() {
   // Create gin router
   r := gin.Default()
 
+  // Setup router
+  r.Use(static.Serve("/", static.LocalFile("public", false)))
+
   // Create word array
   var words [numWords]string
 
@@ -48,19 +53,14 @@ func main() {
     c.String(200, "index")
   })
 
-  // Random word
-  r.GET("/randword", func(c *gin.Context) {
-    myWord := randChoice(words)
-    c.String(200, myWord)
-  })
-
   // Random words
   r.GET("/randwords", func(c *gin.Context) {
     num, err := strconv.Atoi(c.DefaultQuery("num", "4"))
     if err != nil {
-      c.String(500, "Atoi failed")
-    } else if num < 0 {
-      c.String(500, "Invalid input")
+      fmt.Println("Atoi failed for " + c.Query("num"))
+      c.String(400, "Bad Request: Num paramenter was not an integer.")
+    } else if num <= 0 {
+      c.String(400, "Bad Request: Num parameter must be positive.")
     } else {
       // Dynamic array allocation
       var myWords []string
