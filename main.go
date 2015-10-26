@@ -133,6 +133,14 @@ func main() {
     c.JSON(200, gin.H(suffixes))
   })
 
+  r.GET("/characters", func(c *gin.Context) {
+    c.JSON(200, gin.H{
+      "delimiters": delimiters,
+      "prefixes": prefixes,
+      "suffixes": suffixes,
+    })
+  })
+
   /* End routes */
 
   // Run server
