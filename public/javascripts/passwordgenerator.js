@@ -37,7 +37,9 @@ var PasswordOptionSelector = React.createClass({
 var PasswordGenerator = React.createClass({
 	getInitialState: function () {
 		return {
-			delimiterValue: "null"
+			delimiterValue: "null",
+			prefixValue: "null",
+			sufixValue: "null"
 		};
 	},
 
@@ -53,20 +55,24 @@ var PasswordGenerator = React.createClass({
 	},
 
 	handleDelimiterChange: function (event) {
-		console.log(event);
 		this.setState({delimiterValue: event.target.value});
 	},
 
+	handlePrefixChange: function (event) {
+		this.setState({prefixValue: event.target.value});
+	},
+
+	handleSuffixChange: function (event) {
+		this.setState({suffixValue: event.target.value});
+	},
+
 	render: function () {
-		var testObj = {
-			"ayy": {title: "A"},
-			"bee": {title: "B"},
-			"see": {title: "C"}
-		};
 		return (
 		<div class="text-center">
 			<h2>Password Generator</h2>
-			<PasswordOptionSelector name="test" title="Test" options={testObj} value={this.state.delimiterValue} onChange={this.handleDelimiterChange} />
+			<PasswordOptionSelector name="prefix" title="Prefix" options={this.state.prefixes} value={this.state.prefixValue} onChange={this.handlePrefixChange} />
+			<PasswordOptionSelector name="delimiter" title="Delimiter" options={this.state.delimiters} value={this.state.delimiterValue} onChange={this.handleDelimiterChange} />
+			<PasswordOptionSelector name="suffix" title="Suffix" options={this.state.suffixes} value={this.state.suffixValue} onChange={this.handleSuffixChange} />
 		</div>);
 	}
 });
