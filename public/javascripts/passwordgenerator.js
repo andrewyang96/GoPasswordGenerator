@@ -52,7 +52,8 @@ var PasswordGenerator = React.createClass({
 			words: ["correct","horse","battery","staple"],
 			delimiterValue: "",
 			prefixValue: "",
-			suffixValue: ""
+			suffixValue: "",
+			numWords: 4
 		};
 	},
 
@@ -95,13 +96,26 @@ var PasswordGenerator = React.createClass({
 		}
 	},
 
+	handleNumWordsChange: function (event) {
+		this.setState({numWords: Number(event.target.value)});
+	},
+
+	handleSubmit: function (event) {
+		$.getJSON("/randwords", {num: this.state.numWords}, function (data) {
+			this.setState(data);
+		}.bind(this));
+	},
+
 	render: function () {
 		return (
 		<div class="text-center">
 			<h2>Password Generator</h2>
+			<label forHtml="num">Number of Words</label>
+			<input type="number" name="num" min="3" max="6" value={this.state.numWords} onChange={this.handleNumWordsChange} />
 			<PasswordOptionSelector name="prefix" title="Prefix" options={this.state.prefixes} value={this.state.prefixValue} onChange={this.handlePrefixChange} />
 			<PasswordOptionSelector name="delimiter" title="Delimiter" options={this.state.delimiters} value={this.state.delimiterValue} onChange={this.handleDelimiterChange} />
 			<PasswordOptionSelector name="suffix" title="Suffix" options={this.state.suffixes} value={this.state.suffixValue} onChange={this.handleSuffixChange} />
+			<input type="submit" value="Get New Words" onClick={this.handleSubmit} />
 			<GeneratedPasswordView words={this.state.words} delimiter={this.state.delimiterValue} prefix={this.state.prefixValue} suffix={this.state.suffixValue} />
 		</div>);
 	}
