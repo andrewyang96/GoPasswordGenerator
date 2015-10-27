@@ -1,0 +1,1 @@
+web: GoPasswordGenerator -port=$PORT
