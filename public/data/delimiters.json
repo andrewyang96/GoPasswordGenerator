@@ -102,5 +102,45 @@
 	"greaterthan": {
 		"title": "Greater-than sign",
 		"char": ">"
+	},
+	"0": {
+		"title": "Zero",
+		"char": "0"
+	},
+	"1": {
+		"title": "One",
+		"char": "1"
+	},
+	"2": {
+		"title": "Two",
+		"char": "2"
+	},
+	"3": {
+		"title": "Three",
+		"char": "3"
+	},
+	"4": {
+		"title": "Four",
+		"char": "4"
+	},
+	"5": {
+		"title": "Five",
+		"char": "5"
+	},
+	"6": {
+		"title": "Six",
+		"char": "6"
+	},
+	"7": {
+		"title": "Seven",
+		"char": "7"
+	},
+	"8": {
+		"title": "Eight",
+		"char": "8"
+	},
+	"9": {
+		"title": "Nine",
+		"char": "9"
 	}
 }
