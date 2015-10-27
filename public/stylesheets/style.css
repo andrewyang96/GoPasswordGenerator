@@ -9,3 +9,7 @@ body {
 #splash #lead {
 	min-height: 15vh;
 }
+
+.generated-password {
+	font-family: monospace;
+}

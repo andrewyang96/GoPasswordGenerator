@@ -4,7 +4,7 @@ var PasswordOptionSelect = React.createClass({
 	},
 
 	render: function () {
-		return <option key={this.props.optkey} value={this.props.optkey}>{this.props.optval.title}</option>;
+		return <option key={this.props.optkey} value={this.props.optval.char}>{this.props.optval.title}</option>;
 	}
 });
 
@@ -26,44 +26,73 @@ var PasswordOptionSelector = React.createClass({
 		<div>
 			<label htmlFor={this.props.name}>{this.props.title}</label>
 			<select name={this.props.name} value={this.props.value} onChange={this.props.onChange}>
-				<PasswordOptionSelect optkey="null" optval={{title: "<Nothing>"}} />
-				<PasswordOptionSelect optkey="random" optval={{title: "<Random>"}} />
+				<PasswordOptionSelect optkey="" optval={{title: "<Nothing>", char: ""}} />
+				<PasswordOptionSelect optkey="random" optval={{title: "<Random>", char: "random"}} />
 				{Object.keys(this.props.options).map(createOption)}
 			</select>
 		</div>);
 	}
 });
 
+var GeneratedPasswordView = React.createClass({
+	render: function () {
+		if (!this.props.words) {
+			return <h1 className="generated-password"></h1>;
+		}
+		return (
+		<h2 className="generated-password">
+			{this.props.prefix}{this.props.words.join(this.props.delimiter)}{this.props.suffix}
+		</h2>);
+	}
+});
+
 var PasswordGenerator = React.createClass({
 	getInitialState: function () {
 		return {
-			delimiterValue: "null",
-			prefixValue: "null",
-			sufixValue: "null"
+			words: ["correct","horse","battery","staple"],
+			delimiterValue: "",
+			prefixValue: "",
+			suffixValue: ""
 		};
 	},
 
 	componentDidMount: function () {
 		$.getJSON("/characters", function (data) {
-			// console.log(data);
 			this.setState(data);
 		}.bind(this));
 	},
 
-	getInitialState: function () {
-		return {words: []};
-	},
-
 	handleDelimiterChange: function (event) {
-		this.setState({delimiterValue: event.target.value});
+		if (event.target.value == 'random') {
+			var randIdx = Math.floor(Math.random() * Object.keys(this.state.delimiters).length);
+			var randDelimiterKey = Object.keys(this.state.delimiters)[randIdx];
+			var randDelimiterValue = this.state.delimiters[randDelimiterKey].char;
+			this.setState({delimiterValue: randDelimiterValue})
+		} else {
+			this.setState({delimiterValue: event.target.value});
+		}
 	},
 
 	handlePrefixChange: function (event) {
-		this.setState({prefixValue: event.target.value});
+		if (event.target.value === 'random') {
+			var randIdx = Math.floor(Math.random() * Object.keys(this.state.prefixes).length);
+			var randPrefixKey = Object.keys(this.state.prefixes)[randIdx];
+			var randPrefixValue = this.state.prefixes[randPrefixKey].char;
+			this.setState({prefixValue: randPrefixValue})
+		} else {
+			this.setState({prefixValue: event.target.value});
+		}
 	},
 
 	handleSuffixChange: function (event) {
-		this.setState({suffixValue: event.target.value});
+		if (event.target.value === 'random') {
+			var randIdx = Math.floor(Math.random() * Object.keys(this.state.suffixes).length);
+			var randSuffixKey = Object.keys(this.state.suffixes)[randIdx];
+			var randSuffixValue = this.state.suffixes[randSuffixKey].char;
+			this.setState({suffixValue: randSuffixValue})
+		} else {
+			this.setState({suffixValue: event.target.value});
+		}
 	},
 
 	render: function () {
@@ -73,6 +102,7 @@ var PasswordGenerator = React.createClass({
 			<PasswordOptionSelector name="prefix" title="Prefix" options={this.state.prefixes} value={this.state.prefixValue} onChange={this.handlePrefixChange} />
 			<PasswordOptionSelector name="delimiter" title="Delimiter" options={this.state.delimiters} value={this.state.delimiterValue} onChange={this.handleDelimiterChange} />
 			<PasswordOptionSelector name="suffix" title="Suffix" options={this.state.suffixes} value={this.state.suffixValue} onChange={this.handleSuffixChange} />
+			<GeneratedPasswordView words={this.state.words} delimiter={this.state.delimiterValue} prefix={this.state.prefixValue} suffix={this.state.suffixValue} />
 		</div>);
 	}
 });
