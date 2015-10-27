@@ -49,5 +49,10 @@ body {
 .generated-password {
 	font-family: monospace;
 	font-size: 3em;
+	min-height: 15vh;
 	overflow-x: visible;
+}
+
+.footer {
+	margin-bottom: 3vh;
 }

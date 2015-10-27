@@ -37,7 +37,7 @@ var PasswordOptionSelector = React.createClass({
 var GeneratedPasswordView = React.createClass({
 	render: function () {
 		if (!this.props.words) {
-			return <h1 className="generated-password"></h1>;
+			return <div className="generated-password"></div>;
 		}
 		return (
 		<div className="generated-password">

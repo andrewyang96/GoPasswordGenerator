@@ -142,11 +142,37 @@ func main() {
   })
 
   r.GET("/about", func(c *gin.Context) {
-    c.String(200, "ha");
+    tmpl, err := template.ParseFiles("templates/layouts/index.html", "templates/partials/head.html",
+      "templates/partials/about.html", "templates/partials/footer.html")
+    if err != nil {
+      c.String(500, "Internal Server Error: Error parsing templates")
+      return
+    }
+
+    contextObj := gin.H{"title": "EZ Password Generator"}
+
+    err = tmpl.Execute(c.Writer, contextObj)
+    if err != nil {
+      c.String(500, "Internal Server Error: Error executing compiled template")
+      return
+    }
   })
 
   r.GET("/terms", func(c *gin.Context) {
-    c.String(200, "terms")  
+    tmpl, err := template.ParseFiles("templates/layouts/index.html", "templates/partials/head.html",
+      "templates/partials/terms.html", "templates/partials/footer.html")
+    if err != nil {
+      c.String(500, "Internal Server Error: Error parsing templates")
+      return
+    }
+
+    contextObj := gin.H{"title": "EZ Password Generator"}
+
+    err = tmpl.Execute(c.Writer, contextObj)
+    if err != nil {
+      c.String(500, "Internal Server Error: Error executing compiled template")
+      return
+    }
   })
 
   r.GET("/github", func(c *gin.Context) {
