@@ -10,6 +10,44 @@ body {
 	min-height: 15vh;
 }
 
+#passwordgenerator input[type=number] {
+	width: 3em;
+	font-size: 1.25em;
+}
+
+#passwordgenerator label, #passwordgenerator select {
+	font-size: 1.25em;
+	margin-top: 0.5em;
+}
+
+#passwordgenerator label {
+	margin-right: 0.5em;
+}
+
+#passwordgenerator select, #passwordgenerator input[type=submit] {
+	background: #d3d3d3;
+	border: 0 none;
+}
+
+#passwordgenerator select {
+	padding: 5px 10px;
+	cursor: pointer;
+	-webkit-appearance: none;
+}
+
+#passwordgenerator input[type=submit] {
+	margin-top: 5vh;
+	margin-bottom: 5vh;
+	font-size: 2em;
+	padding: 10px 20px;
+	border: 0 none;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
 .generated-password {
 	font-family: monospace;
+	font-size: 3em;
+	overflow-x: visible;
 }

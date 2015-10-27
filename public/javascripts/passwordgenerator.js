@@ -40,16 +40,16 @@ var GeneratedPasswordView = React.createClass({
 			return <h1 className="generated-password"></h1>;
 		}
 		return (
-		<h2 className="generated-password">
+		<div className="generated-password">
 			{this.props.prefix}{this.props.words.join(this.props.delimiter)}{this.props.suffix}
-		</h2>);
+		</div>);
 	}
 });
 
 var PasswordGenerator = React.createClass({
 	getInitialState: function () {
 		return {
-			words: ["correct","horse","battery","staple"],
+			words: null,
 			delimiterValue: "",
 			prefixValue: "",
 			suffixValue: "",
@@ -109,12 +109,21 @@ var PasswordGenerator = React.createClass({
 	render: function () {
 		return (
 		<div class="text-center">
-			<h2>Password Generator</h2>
-			<label forHtml="num">Number of Words</label>
-			<input type="number" name="num" min="3" max="6" value={this.state.numWords} onChange={this.handleNumWordsChange} />
-			<PasswordOptionSelector name="prefix" title="Prefix" options={this.state.prefixes} value={this.state.prefixValue} onChange={this.handlePrefixChange} />
-			<PasswordOptionSelector name="delimiter" title="Delimiter" options={this.state.delimiters} value={this.state.delimiterValue} onChange={this.handleDelimiterChange} />
-			<PasswordOptionSelector name="suffix" title="Suffix" options={this.state.suffixes} value={this.state.suffixValue} onChange={this.handleSuffixChange} />
+			<div className="row">
+				<div className="col-sm-2">
+					<label forHtml="num"># of Words</label>
+					<input type="number" name="num" min="3" max="6" value={this.state.numWords} onChange={this.handleNumWordsChange} />
+				</div>
+				<div className="col-sm-3">
+					<PasswordOptionSelector name="prefix" title="Prefix" options={this.state.prefixes} value={this.state.prefixValue} onChange={this.handlePrefixChange} />
+				</div>
+				<div className="col-sm-4">
+					<PasswordOptionSelector name="delimiter" title="Delimiter" options={this.state.delimiters} value={this.state.delimiterValue} onChange={this.handleDelimiterChange} />
+				</div>
+				<div className="col-sm-3">
+					<PasswordOptionSelector name="suffix" title="Suffix" options={this.state.suffixes} value={this.state.suffixValue} onChange={this.handleSuffixChange} />
+				</div>
+			</div>
 			<input type="submit" value="Get New Words" onClick={this.handleSubmit} />
 			<GeneratedPasswordView words={this.state.words} delimiter={this.state.delimiterValue} prefix={this.state.prefixValue} suffix={this.state.suffixValue} />
 		</div>);
