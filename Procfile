@@ -1,1 +1,1 @@
-web: GoPasswordGenerator -port=$PORT
+web: npm install -g bower && bower install && GoPasswordGenerator -port=$PORT
