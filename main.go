@@ -141,6 +141,18 @@ func main() {
     })
   })
 
+  r.GET("/about", func(c *gin.Context) {
+    c.String(200, "ha");
+  })
+
+  r.GET("/terms", func(c *gin.Context) {
+    c.String(200, "terms")  
+  })
+
+  r.GET("/github", func(c *gin.Context) {
+    c.Redirect(301, "https://github.com/andrewyang96/GoPasswordGenerator")  
+  })
+
   /* End routes */
 
   // Run server
