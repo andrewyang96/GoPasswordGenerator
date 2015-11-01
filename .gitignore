@@ -27,3 +27,4 @@ public/components/
 gin-bin
 main
 GoPasswordGenerator
+node_modules/
