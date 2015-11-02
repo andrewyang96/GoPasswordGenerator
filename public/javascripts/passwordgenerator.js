@@ -47,9 +47,9 @@ var CapitalizationOptionSelector = React.createClass({
 				<option value="0">all lowercase</option>
 				<option value="1">ALL UPPERCASE</option>
 				<option value="2">Capitalize First Letter</option>
-				<option value="3">Capitalize first word</option>
+				<option value="3">Capitalize f.l. of first word</option>
 				<option value="4">cAPITALIZE sUBSEQUENT lETTERS</option>
-				<option value="5">cAPITALIZE s.l. oF first word</option>
+				<option value="5">cAPITALIZE s.l. of first word</option>
 				<option value="6">rANdOm CApitAlIZatiOn</option>
 			</select>
 		</div>);
