@@ -10,6 +10,7 @@ import (
 	"os"
 	"strconv"
 	"text/template"
+	"time"
 )
 
 // Set numWords constant
@@ -38,6 +39,9 @@ func extendJSON(target map[string]interface{}, extension map[string]interface{})
 }
 
 func main() {
+	// Seed random number generator
+	rand.Seed(time.Now().UnixNano())
+
 	// Create gin router
 	r := gin.Default()
 
