@@ -86,7 +86,7 @@ func main() {
 	// Index
 	r.GET("/", func(c *gin.Context) {
 		tmpl, err := template.ParseFiles("templates/layouts/index.html", "templates/partials/head.html",
-			"templates/partials/index.html", "templates/partials/footer.html")
+			"templates/partials/index.html", "templates/partials/footer.html", "templates/partials/adsense.html")
 		if err != nil {
 			c.String(500, "Internal Server Error: Error parsing templates")
 			return
@@ -147,7 +147,7 @@ func main() {
 
 	r.GET("/about", func(c *gin.Context) {
 		tmpl, err := template.ParseFiles("templates/layouts/index.html", "templates/partials/head.html",
-			"templates/partials/about.html", "templates/partials/footer.html")
+			"templates/partials/about.html", "templates/partials/footer.html", "templates/partials/adsense.html")
 		if err != nil {
 			c.String(500, "Internal Server Error: Error parsing templates")
 			return
@@ -164,7 +164,7 @@ func main() {
 
 	r.GET("/terms", func(c *gin.Context) {
 		tmpl, err := template.ParseFiles("templates/layouts/index.html", "templates/partials/head.html",
-			"templates/partials/terms.html", "templates/partials/footer.html")
+			"templates/partials/terms.html", "templates/partials/footer.html", "templates/partials/adsense.html")
 		if err != nil {
 			c.String(500, "Internal Server Error: Error parsing templates")
 			return
